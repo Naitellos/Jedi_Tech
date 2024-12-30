@@ -77,7 +77,6 @@
       padding: 20px;
       gap: 25px;
       position: relative;
-      /* z-index: 1; можно убрать или оставить — не критично */
     }
 
     .section {
@@ -158,14 +157,11 @@
       transform: scale(1.02);
     }
 
-    /* Текст в секциях с лёгким свечением */
     .section p {
       color: #FFFFFF;
       text-shadow: 0 0 10px rgba(255,255,255,0.3);
     }
 
-    /* Дополнительные медиа-запросы (пример) 
-       Можно настроить под себя, чтобы уменьшать размер текста или убирать анимацию */
     @media (max-width: 480px) {
       .star-wars-text {
         font-size: 16px;
@@ -177,7 +173,6 @@
         font-size: 14px;
       }
     }
-
   </style>
 </head>
 <body>
@@ -188,55 +183,161 @@
   <button class="language-switch" onclick="toggleLanguage()">EN</button>
 
   <div class="container">
+    <!-- Секция Пожертвование -->
     <div class="section">
-      <h2>Сделать пожертвование</h2>
-      <p>Поддержите наш проект</p>
-      <a href="https://yoomoney.ru/fundraise/17F6LJMKSO8.241230" target="_blank">Перейти к оплате</a>
+      <h2 data-i18n="donateTitle">Сделать пожертвование</h2>
+      <p data-i18n="donateSub">Поддержите наш проект</p>
+      <a 
+        href="https://yoomoney.ru/fundraise/17F6LJMKSO8.241230" 
+        target="_blank" 
+        data-i18n="donateLink">
+        Перейти к оплате
+      </a>
     </div>
 
+    <!-- Секция Блог -->
     <div class="section">
-      <h2>Блог</h2>
-      <p>Следите за нашими обновлениями</p>
+      <h2 data-i18n="blogTitle">Блог</h2>
+      <p data-i18n="blogSub">Следите за нашими обновлениями</p>
       <div>
-        <a href="https://vk.com/natenik" target="_blank">ВКонтакте</a>
-        <a href="https://t.me/Jedi_Tech" target="_blank">Telegram</a>
+        <a 
+          href="https://vk.com/natenik" 
+          target="_blank" 
+          data-i18n="linkVk"
+        >
+          ВКонтакте
+        </a>
+        <a 
+          href="https://t.me/Jedi_Tech" 
+          target="_blank"
+          data-i18n="linkTg"
+        >
+          Telegram
+        </a>
       </div>
     </div>
 
+    <!-- Секция Обучение + Форма -->
     <div class="section">
-      <h2>Обучение</h2>
-      <p>Записаться на обучение</p>
+      <h2 data-i18n="studyTitle">Обучение</h2>
+      <p data-i18n="studySub">Записаться на обучение</p>
       <!-- 
-        ВАЖНО: атрибут action="tellosnik25@gmail.com" в форме 
-        не будет работать без серверной части или специального сервиса для форм.
-        Если вы используете внешний сервис (Formspree / EmailJS / и т.п.), 
-        нужно указать здесь нужный URL-адрес.
+        Используем Formspree (action="...").
+        При отправке форма будет пересылаться на нужный email (указанный в кабинете Formspree).
       -->
-      <form action="https://formspree.io/f/xbllkepa" 
-        method="POST">
-        <input type="text" name="name" placeholder="Ваше имя" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="phone" placeholder="Телефон" required>
-        <textarea name="message" placeholder="Сообщение" rows="4"></textarea>
-        <button type="submit">Отправить</button>
-    </form>
-        <!-- Скрытые поля для настройки (если сервис поддерживает) -->
-        <input type="hidden" name="_subject" value="Новая заявка на обучение">
-        <input type="hidden" name="_next" value="https://ваш-сайт.com/thanks.html">
-        <button type="submit">Отправить</button>
+      <form 
+        class="contact-form"
+        action="https://formspree.io/f/xbllkepa" 
+        method="POST"
+      >
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Ваше имя"
+          data-i18n-placeholder="formName"
+          required
+        >
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email"
+          data-i18n-placeholder="formEmail"
+          required
+        >
+        <input 
+          type="tel" 
+          name="phone" 
+          placeholder="Телефон"
+          data-i18n-placeholder="formPhone"
+          required
+        >
+        <textarea 
+          name="message" 
+          placeholder="Сообщение" 
+          rows="4"
+          data-i18n-placeholder="formMsg"
+        ></textarea>
+        <button type="submit" data-i18n="formSend">Отправить</button>
       </form>
     </div>
   </div>
 
   <script>
-    function toggleLanguage() {
-      const btn = document.querySelector('.language-switch');
-      if (btn.textContent === 'EN') {
-        btn.textContent = 'RU';
-      } else {
-        btn.textContent = 'EN';
+    // Объект с переводами
+    const translations = {
+      RU: {
+        donateTitle: "Сделать пожертвование",
+        donateSub: "Поддержите наш проект",
+        donateLink: "Перейти к оплате",
+        blogTitle: "Блог",
+        blogSub: "Следите за нашими обновлениями",
+        linkVk: "ВКонтакте",
+        linkTg: "Telegram",
+        studyTitle: "Обучение",
+        studySub: "Записаться на обучение",
+        formName: "Ваше имя",
+        formEmail: "Email",
+        formPhone: "Телефон",
+        formMsg: "Сообщение",
+        formSend: "Отправить",
+      },
+      EN: {
+        donateTitle: "Make a Donation",
+        donateSub: "Support our project",
+        donateLink: "Go to payment",
+        blogTitle: "Blog",
+        blogSub: "Follow our updates",
+        linkVk: "VK",
+        linkTg: "Telegram",
+        studyTitle: "Training",
+        studySub: "Sign up for training",
+        formName: "Your Name",
+        formEmail: "Email",
+        formPhone: "Phone",
+        formMsg: "Message",
+        formSend: "Send",
       }
+    };
+
+    // Текущий язык (по умолчанию RU)
+    let currentLang = "RU";
+
+    // Функция переключения языка
+    function toggleLanguage() {
+      // Меняем язык
+      currentLang = currentLang === "RU" ? "EN" : "RU";
+
+      // Меняем текст на кнопке (EN <-> RU)
+      const btn = document.querySelector('.language-switch');
+      btn.textContent = currentLang === "RU" ? "EN" : "RU";
+
+      // Применяем переводы
+      setLanguage(currentLang);
     }
+
+    // Функция, которая устанавливает переводы
+    function setLanguage(lang) {
+      // Все элементы с атрибутом data-i18n
+      document.querySelectorAll('[data-i18n]').forEach((elem) => {
+        const key = elem.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          elem.textContent = translations[lang][key];
+        }
+      });
+
+      // Отдельно обрабатываем placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((elem) => {
+        const placeholderKey = elem.getAttribute('data-i18n-placeholder');
+        if (translations[lang][placeholderKey]) {
+          elem.placeholder = translations[lang][placeholderKey];
+        }
+      });
+    }
+
+    // При загрузке страницы выставляем RU
+    window.addEventListener('DOMContentLoaded', () => {
+      setLanguage(currentLang);
+    });
   </script>
 </body>
 </html>
