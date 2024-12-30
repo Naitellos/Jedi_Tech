@@ -1,208 +1,343 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой сайт</title>
-    <style>
-        @keyframes scrollText {
-            0% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
+  <meta charset="UTF-8">
+  <!-- Обязательно для адаптивности на мобильных -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой сайт</title>
+  <style>
+    @keyframes scrollText {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #1C1C1E; /* Графитовый черный как у Apple */
-            color: #FFFFFF;
-            overflow-x: hidden;
-        }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #1C1C1E; /* Графитовый черный как у Apple */
+      color: #FFFFFF;
+      overflow-x: hidden;
+    }
 
-        .star-wars-text {
-            position: fixed;
-            right: 30px;
-            color: #FFE81F; /* Желтый цвет Star Wars */
-            font-size: 24px;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            transform: translateY(-100%);
-            animation: scrollText 15s linear infinite;
-            text-shadow: 0 0 10px rgba(255, 232, 31, 0.7);
-            font-family: "Star Jedi", sans-serif;
-        }
+    /* Текст "Feel the Force" */
+    .star-wars-text {
+      position: fixed;
+      right: 30px;
+      top: 0;
+      z-index: 9999; /* чтобы находился поверх остальных элементов */
+      color: #FFE81F; /* Желтый цвет Star Wars */
+      font-size: 24px;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: translateY(-100%);
+      animation: scrollText 15s linear infinite;
+      text-shadow: 0 0 10px rgba(255, 232, 31, 0.7);
+      font-family: "Star Jedi", sans-serif;
+    }
 
-        .language-switch {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background-color: #2C2C2E;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
+    .language-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999; /* чтобы кнопка переключения языка также была "над" */
+      padding: 12px 24px;
+      background-color: #2C2C2E;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
 
-        .language-switch:hover {
-            background-color: #3C3C3E;
-            transform: scale(1.05);
-        }
+    .language-switch:hover {
+      background-color: #3C3C3E;
+      transform: scale(1.05);
+    }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            gap: 25px;
-            position: relative;
-            z-index: 1;
-        }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      gap: 25px;
+      position: relative;
+    }
 
-        .section {
-            width: 90%;
-            max-width: 500px;
-            padding: 35px;
-            margin: 10px;
-            background-color: #2C2C2E; /* Темный фон в стиле Apple */
-            border-radius: 20px; /* Закругление в стиле Apple */
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            text-align: center;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-        }
+    .section {
+      width: 90%;
+      max-width: 500px;
+      padding: 35px;
+      margin: 10px;
+      background-color: #2C2C2E; /* Темный фон в стиле Apple */
+      border-radius: 20px; /* Закругление в стиле Apple */
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
 
-        .section:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-            background-color: #3C3C3E;
-        }
+    .section:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      background-color: #3C3C3E;
+    }
 
-        .section h2 {
-            margin-bottom: 20px;
-            color: #FFFFFF;
-            font-weight: 600;
-        }
+    .section h2 {
+      margin-bottom: 20px;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
 
-        .section a {
-            text-decoration: none;
-            color: #0A84FF; /* Синий цвет Apple */
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+    .section a {
+      text-decoration: none;
+      color: #0A84FF; /* Синий цвет Apple */
+      font-weight: 500;
+      transition: color 0.3s ease;
+      margin: 0 5px;
+    }
 
-        .section a:hover {
-            color: #47A2FF;
-        }
+    .section a:hover {
+      color: #47A2FF;
+    }
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
-        .contact-form input, 
-        .contact-form textarea {
-            padding: 12px;
-            background-color: #1C1C1E;
-            border: 1px solid #3C3C3E;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
+    .contact-form input, 
+    .contact-form textarea {
+      padding: 12px;
+      background-color: #1C1C1E;
+      border: 1px solid #3C3C3E;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
 
-        .contact-form input:focus, 
-        .contact-form textarea:focus {
-            border-color: #0A84FF;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.3);
-        }
+    .contact-form input:focus, 
+    .contact-form textarea:focus {
+      border-color: #0A84FF;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.3);
+    }
 
-        .contact-form button {
-            padding: 12px 24px;
-            background-color: #0A84FF;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
+    .contact-form button {
+      padding: 12px 24px;
+      background-color: #0A84FF;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
 
-        .contact-form button:hover {
-            background-color: #47A2FF;
-            transform: scale(1.02);
-        }
+    .contact-form button:hover {
+      background-color: #47A2FF;
+      transform: scale(1.02);
+    }
 
-        /* Добавляем неоновое свечение для текста */
-        .section p {
-            color: #FFFFFF;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
-        }
-    </style>
+    .section p {
+      color: #FFFFFF;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 480px) {
+      .star-wars-text {
+        font-size: 16px;
+        right: 10px;
+      }
+      .language-switch {
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="star-wars-text">Feel the Force</div>
-    <button class="language-switch" onclick="toggleLanguage()">EN</button>
+  <!-- Пролетающий текст -->
+  <div class="star-wars-text">Feel the Force</div>
 
-    <div class="container">
-        <div class="section">
-            <h2>Сделать пожертвование</h2>
-            <p>Поддержите наш проект</p>
-            <a href="https://yoomoney.ru/your-account" target="_blank">Перейти к оплате</a>
-        </div>
+  <!-- Кнопка переключения языка -->
+  <button class="language-switch" onclick="toggleLanguage()">EN</button>
 
-        <div class="section">
-            <h2>Блог</h2>
-            <p>Следите за нашими обновлениями</p>
-            <div>
-                <a href="https://vk.com/natenik" target="_blank">ВКонтакте</a>
-            
-                <a href="https://t.me/Jedi_Tech" target="_blank">Telegram</a>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Обучение</h2>
-            <p>Записаться на обучение</p>
-            <form class="contact-form" action="tellosnik25@gmail.com" method="POST">
-                <input type="text" name="name" placeholder="Ваше имя" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="tel" name="phone" placeholder="Телефон" required>
-                <textarea name="message" placeholder="Сообщение" rows="4"></textarea>
-                <!-- Скрытые поля для настройки -->
-                <input type="hidden" name="_subject" value="Новая заявка на обучение">
-                <input type="hidden" name="_next" value="https://ваш-сайт.com/thanks.html">
-                <button type="submit">Отправить</button></form>
-        </div>
+  <div class="container">
+    <!-- Секция Пожертвование -->
+    <div class="section">
+      <h2 data-i18n="donateTitle">Сделать пожертвование</h2>
+      <p data-i18n="donateSub">Поддержите наш проект</p>
+      <a 
+        href="https://yoomoney.ru/fundraise/17F6LJMKSO8.241230" 
+        target="_blank" 
+        data-i18n="donateLink">
+        Перейти к оплате
+      </a>
     </div>
 
-    <script>
-        function toggleLanguage() {
-            const btn = document.querySelector('.language-switch');
-            if (btn.textContent === 'EN') {
-                btn.textContent = 'RU';
-            } else {
-                btn.textContent = 'EN';
-            }
+    <!-- Секция Блог -->
+    <div class="section">
+      <h2 data-i18n="blogTitle">Блог</h2>
+      <p data-i18n="blogSub">Следите за нашими обновлениями</p>
+      <div>
+        <a 
+          href="https://vk.com/natenik" 
+          target="_blank" 
+          data-i18n="linkVk"
+        >
+          ВКонтакте
+        </a>
+        <a 
+          href="https://t.me/Jedi_Tech" 
+          target="_blank"
+          data-i18n="linkTg"
+        >
+          Telegram
+        </a>
+      </div>
+    </div>
+
+    <!-- Секция Обучение + Форма -->
+    <div class="section">
+      <h2 data-i18n="studyTitle">Обучение</h2>
+      <p data-i18n="studySub">Записаться на обучение</p>
+      <!-- 
+        Используем Formspree (action="...").
+        При отправке форма будет пересылаться на нужный email (указанный в кабинете Formspree).
+      -->
+      <form 
+        class="contact-form"
+        action="https://formspree.io/f/xbllkepa" 
+        method="POST"
+      >
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Ваше имя"
+          data-i18n-placeholder="formName"
+          required
+        >
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email"
+          data-i18n-placeholder="formEmail"
+          required
+        >
+        <input 
+          type="tel" 
+          name="phone" 
+          placeholder="Телефон"
+          data-i18n-placeholder="formPhone"
+          required
+        >
+        <textarea 
+          name="message" 
+          placeholder="Сообщение" 
+          rows="4"
+          data-i18n-placeholder="formMsg"
+        ></textarea>
+        <button type="submit" data-i18n="formSend">Отправить</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Объект с переводами
+    const translations = {
+      RU: {
+        donateTitle: "Сделать пожертвование",
+        donateSub: "Поддержите наш проект",
+        donateLink: "Перейти к оплате",
+        blogTitle: "Блог",
+        blogSub: "Следите за нашими обновлениями",
+        linkVk: "ВКонтакте",
+        linkTg: "Telegram",
+        studyTitle: "Обучение",
+        studySub: "Записаться на обучение",
+        formName: "Ваше имя",
+        formEmail: "Email",
+        formPhone: "Телефон",
+        formMsg: "Сообщение",
+        formSend: "Отправить",
+      },
+      EN: {
+        donateTitle: "Make a Donation",
+        donateSub: "Support our project",
+        donateLink: "Go to payment",
+        blogTitle: "Blog",
+        blogSub: "Follow our updates",
+        linkVk: "VK",
+        linkTg: "Telegram",
+        studyTitle: "Training",
+        studySub: "Sign up for training",
+        formName: "Your Name",
+        formEmail: "Email",
+        formPhone: "Phone",
+        formMsg: "Message",
+        formSend: "Send",
+      }
+    };
+
+    // Текущий язык (по умолчанию RU)
+    let currentLang = "RU";
+
+    // Функция переключения языка
+    function toggleLanguage() {
+      // Меняем язык
+      currentLang = currentLang === "RU" ? "EN" : "RU";
+
+      // Меняем текст на кнопке (EN <-> RU)
+      const btn = document.querySelector('.language-switch');
+      btn.textContent = currentLang === "RU" ? "EN" : "RU";
+
+      // Применяем переводы
+      setLanguage(currentLang);
+    }
+
+    // Функция, которая устанавливает переводы
+    function setLanguage(lang) {
+      // Все элементы с атрибутом data-i18n
+      document.querySelectorAll('[data-i18n]').forEach((elem) => {
+        const key = elem.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          elem.textContent = translations[lang][key];
         }
-    </script>
-</body></html>
+      });
+
+      // Отдельно обрабатываем placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((elem) => {
+        const placeholderKey = elem.getAttribute('data-i18n-placeholder');
+        if (translations[lang][placeholderKey]) {
+          elem.placeholder = translations[lang][placeholderKey];
+        }
+      });
+    }
+
+    // При загрузке страницы выставляем RU
+    window.addEventListener('DOMContentLoaded', () => {
+      setLanguage(currentLang);
+    });
+  </script>
+</body>
+</html>
